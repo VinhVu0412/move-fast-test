@@ -1,18 +1,22 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "yarn db:up && next dev",
     "lint": "next lint",
     "build": "next build",
     "start": "next start",
     "test": "jest --watch",
     "test:ci": "jest --ci",
+    "test:all": "yarn db:up && yarn lint && jest && yarn build && yarn e2e:headless && yarn db:down",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
     "e2e": "start-server-and-test start http://localhost:3000 cypress",
-    "e2e:headless": "start-server-and-test start http://localhost:3000 cypress:headless"
+    "e2e:headless": "start-server-and-test start http://localhost:3000 cypress:headless",
+    "db:up": "docker-compose up -d && yarn prisma migrate deploy",
+    "db:down": "docker-compose down"
   },
   "dependencies": {
+    "@prisma/client": "^3.3.0",
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
@@ -23,11 +27,13 @@
     "@testing-library/user-event": "13.2.1",
     "babel-jest": "27.0.6",
     "cypress": "^8.7.0",
+    "dotenv-cli": "^4.0.0",
     "eslint": "7.32.0",
     "eslint-config-next": "latest",
     "eslint-plugin-testing-library": "4.11.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "27.0.6",
+    "prisma": "3.3.0",
     "react-test-renderer": "17.0.2",
     "start-server-and-test": "^1.14.0"
   }

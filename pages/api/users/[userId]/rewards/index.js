@@ -1,6 +1,6 @@
 import prisma from '../../../../../lib/prisma';
 import { parseDate } from '../../../../../lib/api/utils';
-import { successResponse, errorResponse } from '../../../../../lib/api/responses';
+import { successResponse, errorResponse, formatReward } from '../../../../../lib/api/responses';
 
 function toLastSunday(at) {
   let date = parseDate(at);
@@ -88,23 +88,6 @@ async function getOrCreateRewards(user, fromDate) {
 
   return rewards.concat(...newRewards).sort((r1, r2) => r1.expiresAt > r2.expiresAt);
 }
-
-
-
-const formatOutputDateString = (dateString) => {
-  if (!dateString) return null;
-
-  // change :00.000Z to :00Z
-  const isoString = new Date(dateString).toISOString()
-  return `${isoString.slice(0, isoString.length - 5)}Z`;
-}
-
-
-const formatReward = ({ availableAt, redeemedAt, expiresAt }) => ({
-  availableAt: formatOutputDateString(availableAt),
-  redeemedAt: formatOutputDateString(redeemedAt),
-  expiresAt: formatOutputDateString(expiresAt),
-});
 
 export default async function rewards({ query: { userId, at } }, res) {
   if (!at) {

@@ -5,7 +5,7 @@
     "lint": "next lint",
     "build": "next build",
     "start": "next start",
-    "test": "jest --watch",
+    "test": "jest --watch --runInBand",
     "test:ci": "jest --ci",
     "test:all": "yarn db:up && yarn lint && jest && yarn build && yarn e2e:headless && yarn db:down",
     "cypress": "cypress open",

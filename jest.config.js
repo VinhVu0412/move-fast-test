@@ -30,4 +30,5 @@ module.exports = {
     '/node_modules/',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
+  testRegex: '(/__tests__/.*|(\\.|/))\\.(test|spec)\\.jsx?$',
 }

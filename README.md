@@ -1,5 +1,8 @@
 # move-fast-test
 This is for the entrance test from MoveFast
+Requirements:
+- BE: https://gist.github.com/binary-koan/17707ac079a95b2868233c30bef2b0af
+- FE https://gist.github.com/binary-koan/662d46a941b1b55c9a048cf05d9574e7
 
 # Next.js + Jest
 

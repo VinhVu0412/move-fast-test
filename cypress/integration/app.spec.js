@@ -2,6 +2,6 @@ describe('App', () => {
   it('should have correct heading', () => {
     cy.visit('http://localhost:3000/')
 
-    cy.title().should('eq', 'Vinh Vu - Remitano Assessment Test')
+    cy.get('button').its('length').should('be.eql', 10)
   })
 })

@@ -1,48 +1,67 @@
-import Head from 'next/head'
+import React from 'react';
+
+import Box from '../components/Box';
 import styles from './index.module.css'
 
-const Home = () => (
-  <div className={styles.container}>
-    <Head>
-      <title>Vinh Vu - Remitano Assessment Test</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+function shuffleArray(array) {
+  // Fisher–Yates shuffle https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = newArray[i];
+      newArray[i] = newArray[j];
+      newArray[j] = temp;
+  }
+  return newArray;
+}
 
-    <main>
-      <h1 className={styles.title}>
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h1>
+const COLORS = ['#2572D0', '#C72E49', '#76684D', '#9B4F50', '#5E00B6', '#1EA18E', '#1C6755', '#523AF3', '#3B4959'];
 
-      <p className={styles.description}>
-        Get started by editing <code>pages/index.js</code>
-      </p>
+const Home = () => {
+  const [colors, setColors] = React.useState(COLORS);
 
-      <div className={styles.grid}>
-        <a href="https://nextjs.org/docs" className={styles.card}>
-          <h3>Documentation &rarr;</h3>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+  const shuffleColors = React.useCallback(() => {
+    setColors(shuffleArray);
+  }, [setColors]);
 
-        <a href="https://nextjs.org/learn" className={styles.card}>
-          <h3>Learn &rarr;</h3>
-          <p>Learn about Next.js in an interactive course with quizzes!</p>
-        </a>
+  const boxes = React.useMemo(() => {
+  return colors.map((color, idx) => <Box key={idx} color={color} onClick={shuffleColors}>{idx + 1}</Box>);
+  }, [colors, shuffleColors])
 
-        <a
-          href="https://github.com/vercel/next.js/tree/master/examples"
-          className={styles.card}
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Discover and deploy boilerplate example Next.js projects.</p>
-        </a>
-
-        <a href="https://vercel.com/new" className={styles.card}>
-          <h3>Deploy &rarr;</h3>
-          <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
-        </a>
+  return (
+    <div className={styles.container}>
+      <div className={styles.layout}>
+        <div className={styles.topHalf}>
+          {boxes[0]}
+          <div className={styles.layout234}>
+            {boxes[1]}
+            <div className={styles.layout34}>
+              {boxes[2]}
+              {boxes[3]}
+            </div>
+          </div>
+        </div>
+        <div className={styles.bottomHalf}>
+          {
+            boxes[6] // display on on desktop
+          } 
+          <div className={styles.layout5689}>
+            <div className={styles.layout56}>
+              {boxes[4]}
+              {boxes[5]}
+            </div>
+            {
+              boxes[6] // display on on mobile
+            }
+            <div className={styles.layout89}>
+              {boxes[7]}
+              {boxes[8]}
+            </div>
+          </div>
+        </div>
       </div>
-    </main>
-  </div>
-)
+    </div>
+  );
+};
 
-export default Home
+export default Home;

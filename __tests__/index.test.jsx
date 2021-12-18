@@ -8,32 +8,18 @@ import Home from '../pages/index'
 
 describe('Home', () => {
   const collectBoxColors = () => {
-    let colors = [];
-    for (let i = 1; i < 10 ; i++) {
-      const box = screen.getAllByText(`${i}`)[0];
-      colors.push(box.style.backgroundColor);
-    }
-    return colors;
-  }
+    return Array.from(Array(9)).map((_, i) => {
+      const box = screen.getByText(`${i + 1}`);
+      return box.style.backgroundColor;
+    });
+  };
 
-  it('renders boxes', () => {
+  it('renders 9 boxes', () => {
     render(<Home />)
-    expect(screen.getByText('1')).toBeInTheDocument()
-    expect(screen.getByText('2')).toBeInTheDocument()
-    expect(screen.getByText('3')).toBeInTheDocument()
-    expect(screen.getByText('4')).toBeInTheDocument()
-    expect(screen.getByText('5')).toBeInTheDocument()
-    expect(screen.getByText('6')).toBeInTheDocument()
-    expect(screen.getByText('8')).toBeInTheDocument()
-    expect(screen.getByText('9')).toBeInTheDocument()
 
-    // two 7 boxes, 1 for desktop layout, the other for mobile layout
-    const sevenBoxes = screen.getAllByText('7');
-    expect(sevenBoxes.length).toBe(2);
-
-    expect(sevenBoxes[0].style.backgroundColor).toBe(
-      sevenBoxes[1].style.backgroundColor
-    );
+    Array.from(Array(9)).forEach((_, i) => {
+      expect(screen.getByText(`${i + 1}`)).toBeInTheDocument()
+    })
   });
 
   it('should shuffle box colors when clicking on a box', () => {
@@ -49,13 +35,5 @@ describe('Home', () => {
         return JSON.stringify(newColors) !== JSON.stringify(colors)
       })
     ).toBe(true);
-
-    // two 7 buttons should have the same color
-    const sevenBoxes = screen.getAllByText('7');
-    expect(sevenBoxes.length).toBe(2);
-
-    expect(sevenBoxes[0].style.backgroundColor).toBe(
-      sevenBoxes[1].style.backgroundColor
-    );
   });
 });

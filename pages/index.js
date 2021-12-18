@@ -42,21 +42,14 @@ const Home = () => {
           </div>
         </div>
         <div className={styles.bottomHalf}>
-          {
-            boxes[6] // display on on desktop
-          } 
-          <div className={styles.layout5689}>
-            <div className={styles.layout56}>
-              {boxes[4]}
-              {boxes[5]}
-            </div>
-            {
-              boxes[6] // display on on mobile
-            }
-            <div className={styles.layout89}>
-              {boxes[7]}
-              {boxes[8]}
-            </div>
+          <div className={styles.layout56}>
+            {boxes[4]}
+            {boxes[5]}
+          </div>
+          {boxes[6]}
+          <div className={styles.layout89}>
+            {boxes[7]}
+            {boxes[8]}
           </div>
         </div>
       </div>

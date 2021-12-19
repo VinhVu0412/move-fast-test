@@ -1,6 +1,5 @@
 .box {
-  width: 100%;
-  height: 100%;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,11 +7,4 @@
   font-size: 4vw;
   border: none;
   cursor: pointer;
-  /* Border here is a pseudo margin to keep boxed sizes equals */
-  /* Margin and padding causes inner boxes smaller than the outer ones */
-  border: solid 1vw white;
-}
-
-.wrapper {
-  flex: 1;
 }

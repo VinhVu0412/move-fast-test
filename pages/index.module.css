@@ -6,10 +6,12 @@
   align-items: center;
 
   --bigger-flex-child: 1.5;
+  --flex-gap: 1vw;
 }
 
 .layout {
   display: flex;
+  gap: var(--flex-gap);
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -23,18 +25,21 @@
   flex: 1;
   min-height: 38vw;
   display: flex;
+  gap: var(--flex-gap);
   flex-direction: row;
 }
 
 .layout234 {
   flex: 1;
   display: flex;
+  gap: var(--flex-gap);
   flex-direction: column;
 }
 
 .layout34 {
   flex: 1;
   display: flex;
+  gap: var(--flex-gap);
   flex-direction: row;
 }
 
@@ -42,12 +47,14 @@
   width: 100%;
   flex: 1;
   display: flex;
+  gap: var(--flex-gap);
   flex-direction: row;
 }
 
 .layout56 {
   flex: 1;
   display: flex;
+  gap: var(--flex-gap);
   flex-direction: column;
 }
 
@@ -58,6 +65,7 @@
 .layout89 {
   flex: 1;
   display: flex;
+  gap: var(--flex-gap);
   flex-direction: column;
 }
 
@@ -66,10 +74,6 @@
 }
 
 @media (max-width: 600px) {
-  .container button {
-    height: 18vw;
-  }
-
   .layout {
     height: 108vw;
   }
@@ -90,11 +94,18 @@
   .bottomHalf {
     flex-direction: row;
     flex-wrap: wrap;
+
+    --row-height: calc((100% - 2 * var(--flex-gap)) / 3);
   }
 
   .bottomHalf > :nth-child(2) {
     flex-basis: 100%;
     order: -1;
+    height: var(--row-height);
+  }
+
+  .layout56, .layout89 {
+    height: calc(2 * var(--row-height));
   }
 
   .layout56 > :nth-child(2) {
